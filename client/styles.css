@@ -27,7 +27,7 @@ body {
     height: 480px;
 
     /* Use a wider splash screen and center it within the container */
-    background: url("images/screens/splashscreen.png");
+    background: url("images/screens/space.jpg");
     background-position: center;
     background-repeat: no-repeat;
 
@@ -50,7 +50,6 @@ body {
 
 .game-title {
     position: absolute;
-
     top: 5%;
     right: 5%;
     text-align: right;
@@ -74,7 +73,7 @@ body {
     font-size: 48px;
     color: white;
     text-shadow: -2px 0 purple, 0 2px purple, 2px 0 purple, 0 -2px purple;
-
+    
     cursor: pointer;
 }
 
@@ -85,7 +84,7 @@ body {
 /* Loading Screen */
 
 #loadingscreen {
-    background: rgba(100, 100, 100, 0.7);
+    background: rgba(100,100,100,0.7);
 }
 
 #loadingmessage {
@@ -95,7 +94,7 @@ body {
 
     height: 48px;
     color: white;
-    background: url("images/loader.gif") no-repeat center;
+    background: url("image/loader.gif") no-repeat center;
     font: 12px Arial;
 }
 
@@ -136,7 +135,7 @@ input[type="button"] {
     top: 82px;
     left: 3px;
 
-    background-position: -4px -4px;
+    background-position: -4px -4x;
 }
 
 #entermission:disabled, #entermission:active {
@@ -155,11 +154,10 @@ input[type="button"] {
 }
 
 #exitmission:disabled, #exitmission:active {
-    background-position: -84px -64px;
+    background-position: -84px -64px; 
 }
 
 #missionbriefing {
-
     position: absolute;
 
     top: 170px;
@@ -170,66 +168,9 @@ input[type="button"] {
     text-align: justify;
 
     color: rgb(130, 150, 162);
+
     text-shadow: -1px 1px black;
 
     font-size: 16px;
     font-family: "Courier New", Courier, monospace;
-}
-
-/* Game Interface Screen */
-
-#gameinterfacescreen {
-    background: url("images/screens/interface-middle.png");
-}
-
-#gameinterfacescreen #gamemessages {
-    position: absolute;
-    padding: 5px;
-
-    top: 4px;
-    left: 5px;
-
-    right: 168px;
-    height: 60px;
-
-    color: rgb(130, 150, 162);
-
-    overflow: hidden;
-    font-size: 13px;
-    font-family: "Courier New", Courier, monospace;
-}
-
-#gamemessages span {
-    color: white;
-}
-
-#callerpicture {
-    position: absolute;
-
-    right: 20px;
-    top: 155px;
-    width: 114px;
-    height: 72px;
-
-    overflow: hidden;
-}
-
-#cash {
-    width: 120px;
-    height: 22px;
-    position: absolute;
-    right: 20px;
-    top: 241px;
-
-    color: rgb(130, 150, 162);
-    overflow: hidden;
-    font-size: 14px;
-    font-family: "Courier New", Courier, monospace;
-    text-align: right;
-}
-
-#gameinterfacescreen canvas {
-    position: absolute;
-    top: 79px;
-    left: 0;
 }

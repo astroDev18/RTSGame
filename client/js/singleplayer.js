@@ -25,6 +25,11 @@ let singleplayer = {
 
         game.loadLevelData(level);
 
+        // Set player starting location
+
+        game.offsetX = level.startX * game.gridSize;
+        game.offsetY = level.startY * game.gridSize;
+
         // Enable the Enter Mission button once all assets are loaded
         loader.onload = function () {
             enterMissionButton.disabled = false;
@@ -47,5 +52,14 @@ let singleplayer = {
         // Display the main game Menu
         game.hideScreens();
         game.showScreen("gamestartscreen");
+    },
+    play: function () {
+        // Run the animation loop once
+        game.animationLoop();
+
+        // Start the animation loop interval
+        game.animationInterval = setInterval(game.animationLoop, game.animationTimeout);
+
+        game.start();
     },
 };

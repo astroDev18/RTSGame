@@ -1,15 +1,36 @@
 // Defining Game Object
 
-var game = {
+let game = {
     // Start initializing objects, preloading assets, and display start screen
     init: function () {
         // Initialize game objects
         loader.init();
 
+        // Initialize and store contexts for both the canvases
+        game.initCanvases();
+
         // Display main game menu
         game.hideScreens();
         game.showScreen("gamestartscreen");
     },
+
+    canvasWidth: 480,
+    canvasHeight: 400,
+
+    initCanvases: function () {
+        game.backgroundCanvas = document.getElementById("gamebackgroundcanvas");
+        game.backgroundContext = game.backgroundCanvas.getContext("2d");
+
+        game.foregroundCanvas = document.getElementById("gameforegroundcanvas");
+        game.foregroundContext = game.foregroundCanvas.getContext("2d");
+
+        game.foregroundCanvas.width = game.canvasWidth;
+        game.backgroundCanvas.width = game.canvasWidth;
+
+        game.foregroundCanvas.height = game.canvasHeight;
+        game.backgroundCanvas.height = game.canvasHeight;
+    },
+
 
     hideScreens: function () {
         var screens = document.getElementsByClassName("gamelayer");
@@ -54,6 +75,15 @@ var game = {
 
         // Apply this new width to game container and game canvas
         gameContainer.style.width = width + "px";
+
+        // Subtract 160px for sidebar 
+        const canvasWidth = width - 160;
+
+        // Set a flag in case the canvas was resized
+        if (game.canvasWidth !== canvasWidth) {
+            game.canvasWidth = canvasWidth;
+            game.canvasResized = true;
+        }
     },
     loadLevelData: function (level) {
         game.currentLevel = level;
@@ -61,6 +91,64 @@ var game = {
 
         // Load all the assets for the level starting with the map image
         game.currentMapImage = loader.loadImage("images/maps/" + maps[level.mapName].mapImage);
+    },
+
+    start: function () {
+        // Display the game interface and hide all other layers
+        game.hideScreens();
+        game.showScreen("gameinterfacescreen");
+
+        game.running = true;
+        game.refreshBackground = true;
+        game.canvasResized = true;
+
+        game.drawingLoop();
+    },
+    // A control loop that runs at a fixed period of time
+    animationTimeout: 100, // 10 times a second
+
+    animationLoop: function () {
+    },
+
+    // The map is broken into square tiles of this size (20 pixels x 20 pixels)
+    gridSize: 20,
+    // X & Y panning offsets for the map
+    offsetX: 0,
+    offsetY: 0,
+
+    drawingLoop: function () {
+        // Draw the background whenever neccessary
+        game.drawBackground();
+
+        // Call the drawing loop for the next frame using request animation frame
+        if (game.running) {
+            requestAnimationFrame(game.drawingLoop);
+        }
+    },
+
+    drawBackground: function () {
+        // Only redraw the background if it changes
+        if (game.refreshBackground || game.canvasResized) {
+            if (game.canvasResized) {
+                game.backgroundCanvas.width = game.canvasWidth;
+                game.foregroundCanvas.width = game.canvasWidth;
+
+                // Ensure the resizing doesn't cause the map to pan out of bounds
+                if (game.offsetX + game.canvasWidth > game.currentMapImage.width) {
+                    game.offsetX = game.currentMapImage.width - game.canvasWidth;
+                }
+
+                if (game.offsetY + game.canvasHeight > game.currentMapImage.height) {
+                    game.offsetY = game.currentMapImage.height - game.canvasHeight;
+                }
+
+                game.canvasResized = false;
+            }
+
+            game.backgroundContext.drawImage(game.currentMapImage, game.offsetX, game.offsetY, game.canvasWidth,
+                game.canvasHeight, 0, 0, game.canvasWidth, game.canvasHeight);
+            game.refreshBackground = false;
+        }
     },
 };
 

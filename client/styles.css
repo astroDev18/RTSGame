@@ -94,7 +94,7 @@ body {
 
     height: 48px;
     color: white;
-    background: url("image/loader.gif") no-repeat center;
+    background: url("images/loader.gif") no-repeat center;
     font: 12px Arial;
 }
 
@@ -173,4 +173,59 @@ input[type="button"] {
 
     font-size: 16px;
     font-family: "Courier New", Courier, monospace;
+}
+
+#gameinterfacescreen {
+    background: url("images/screens/interface-middle.png");
+}
+
+#gameinterfacescreen #gamemessages {
+    position: absolute;
+    padding: 5px;
+
+    top: 4px;
+    left: 5px;
+
+    right: 168px;
+    height: 60px;
+
+    color: rgb(130,150,162);
+
+    overflow: hidden;
+    font-size: 13px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+#gamemessages span {
+    color: white;
+}
+
+#callerpicture {
+    position: absolute;
+
+    right: 20px;
+    top: 155px;
+    width: 114px;
+    height: 72px;
+    overflow: hidden;
+}
+
+#cash {
+    width: 120px;
+    height: 22px;
+    position: absolute;
+    right: 20px;
+    top: 241px;
+
+    color: rgb(130, 150, 162);
+    overflow: hidden;
+    font-size: 14px;
+    font-family: "Courier New",Courier, monospace;
+    text-align: right;
+}
+
+#gameinterfacescreen canvas {
+    position: absolute;
+    top: 79px;
+    left: 0;
 }
